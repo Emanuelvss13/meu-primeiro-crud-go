@@ -9,7 +9,7 @@ func InitRoutes(r *gin.RouterGroup) {
 
 	r.GET("/getUserById/:userId", controller.FindUserByID)
 	r.GET("/getUserByEmail/:userEmail", controller.FindUserByEmail)
-	r.POST("/createUser")
+	r.POST("/createUser", controller.CreateUser)
 	r.PATCH("/updateUser/:userId")
 	r.DELETE("/deleteUser/:userId")
 
