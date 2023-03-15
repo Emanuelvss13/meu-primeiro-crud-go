@@ -12,10 +12,6 @@ import (
 	"go.uber.org/zap"
 )
 
-var (
-	UserDomainInterface model.UserDomainInterface
-)
-
 func CreateUser(c *gin.Context) {
 
 	var userRequest request.UserRequest
