@@ -3,9 +3,16 @@ package model
 import (
 	"crypto/md5"
 	"encoding/hex"
-
-	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/configuration/Error"
 )
+
+type UserDomainInterface interface {
+	GetName() string
+	GetAge() int8
+	GetEmail() string
+	GetPassword() string
+
+	EncryptPassword()
+}
 
 type userDomain struct {
 	email    string
@@ -51,11 +58,4 @@ func (u *userDomain) EncryptPassword() {
 
 	u.password = hex.EncodeToString(hash.Sum(nil))
 
-}
-
-type UserDomainInterface interface {
-	CreateUser() *Error.RestError
-	UpdateUser(string) *Error.RestError
-	FindUser(string) (*userDomain, *Error.RestError)
-	DeleteUser(string) *Error.RestError
 }
