@@ -1,44 +1,33 @@
 package model
 
-import (
-	"encoding/json"
-)
-
 type userDomain struct {
-	ID       string `json:"id"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-	Name     string `json:"name"`
-	Age      int8   `json:"age"`
+	id       string
+	email    string
+	password string
+	name     string
+	age      int8
 }
 
-func (u *userDomain) GetJSONValue() (string, error) {
-	json, err := json.Marshal(u)
-
-	if err != nil {
-
-		return "", err
-	}
-
-	return string(json), nil
+func (u *userDomain) GetID() string {
+	return u.id
 }
 
 func (u *userDomain) GetName() string {
-	return u.Name
+	return u.name
 }
 
 func (u *userDomain) GetAge() int8 {
-	return u.Age
+	return u.age
 }
 
 func (u *userDomain) GetEmail() string {
-	return u.Email
+	return u.email
 }
 
 func (u *userDomain) GetPassword() string {
-	return u.Password
+	return u.password
 }
 
 func (u *userDomain) ChangeID(id string) {
-	u.ID = id
+	u.id = id
 }

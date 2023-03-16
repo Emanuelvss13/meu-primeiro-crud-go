@@ -1,6 +1,7 @@
 package model
 
 type UserDomainInterface interface {
+	GetID() string
 	GetName() string
 	GetAge() int8
 	GetEmail() string
@@ -8,7 +9,6 @@ type UserDomainInterface interface {
 
 	ChangeID(string)
 
-	GetJSONValue() (string, error)
 	EncryptPassword()
 }
 
@@ -17,10 +17,10 @@ func NewUserDomain(
 	age int8,
 ) UserDomainInterface {
 	return &userDomain{
-		ID:       "",
-		Name:     name,
-		Age:      age,
-		Email:    email,
-		Password: password,
+		id:       "",
+		name:     name,
+		age:      age,
+		email:    email,
+		password: password,
 	}
 }

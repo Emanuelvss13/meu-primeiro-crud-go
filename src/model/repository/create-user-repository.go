@@ -7,10 +7,12 @@ import (
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/configuration/Error"
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/configuration/logger"
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/model"
+	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/model/repository/entity/converter"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 var (
-	MONGODB_COLLECTION = "MONGODB_COLLECTION"
+	MONGODB_COLLECTION = "MONGODB_USER_COLLECTION"
 )
 
 func (ur *userRepository) CreateUser(
@@ -22,11 +24,7 @@ func (ur *userRepository) CreateUser(
 
 	collection := ur.db.Collection(collectionName)
 
-	value, err := userDomain.GetJSONValue()
-
-	if err != nil {
-		return nil, Error.NewInternalServerError(err.Error())
-	}
+	value := converter.ConvertDomainToEntity(userDomain)
 
 	result, err := collection.InsertOne(context.Background(), value)
 
@@ -34,7 +32,7 @@ func (ur *userRepository) CreateUser(
 		return nil, Error.NewInternalServerError(err.Error())
 	}
 
-	userDomain.ChangeID(result.InsertedID.(string))
+	value.ID = result.InsertedID.(primitive.ObjectID)
 
-	return userDomain, nil
+	return converter.ConvertEntityToDomain(*value), nil
 }
