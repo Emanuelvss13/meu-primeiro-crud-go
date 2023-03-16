@@ -6,9 +6,7 @@ import (
 
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/configuration/database/mongodb"
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/configuration/logger"
-	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/controller"
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/controller/routes"
-	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/model/service"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -16,18 +14,23 @@ import (
 func main() {
 	logger.Info("About to start application")
 
-	ctx := context.Background()
-
-	mongodb.NewMongoDBConnection(ctx)
-
 	err := godotenv.Load()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	service := service.NewUserDomainService()
-	userController := controller.NewUserController(service)
+	ctx := context.Background()
+
+	database, err := mongodb.NewMongoDBConnection(ctx)
+
+	if err != nil {
+		log.Fatalf(
+			"Error trying to connect to MongoDB, error: %s", err.Error(),
+		)
+	}
+
+	userController := initDependencies(database)
 
 	router := gin.Default()
 
