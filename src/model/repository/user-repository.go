@@ -6,9 +6,19 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+var (
+	MONGODB_COLLECTION = "MONGODB_USER_COLLECTION"
+)
+
 type UserRepositoryInterface interface {
 	CreateUser(
 		userDomain model.UserDomainInterface,
+	) (model.UserDomainInterface, *Error.RestError)
+	FindUserByEmail(
+		email string,
+	) (model.UserDomainInterface, *Error.RestError)
+	FindUserByID(
+		id string,
 	) (model.UserDomainInterface, *Error.RestError)
 }
 
