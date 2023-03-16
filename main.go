@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/configuration/database/mongodb"
@@ -15,7 +16,9 @@ import (
 func main() {
 	logger.Info("About to start application")
 
-	mongodb.NewMongoDBConnection()
+	ctx := context.Background()
+
+	mongodb.NewMongoDBConnection(ctx)
 
 	err := godotenv.Load()
 
