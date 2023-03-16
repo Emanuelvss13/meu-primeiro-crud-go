@@ -15,7 +15,7 @@ import (
 func main() {
 	logger.Info("About to start application")
 
-	mongodb.InitConnection()
+	mongodb.NewMongoDBConnection()
 
 	err := godotenv.Load()
 
