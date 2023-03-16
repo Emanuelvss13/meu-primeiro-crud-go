@@ -15,7 +15,7 @@ func (u *userDomainService) CreateUser(userDomain model.UserDomainInterface) *Er
 
 	userDomain.EncryptPassword()
 
-	fmt.Println(u)
+	fmt.Println(userDomain)
 
 	return nil
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func FindUserByID(c *gin.Context) {
+func (uc *userController) FindUserByID(c *gin.Context) {
 
 	err := Error.NewInternalServerError("Error")
 
@@ -13,6 +13,6 @@ func FindUserByID(c *gin.Context) {
 
 }
 
-func FindUserByEmail(c *gin.Context) {
+func (uc *userController) FindUserByEmail(c *gin.Context) {
 
 }
