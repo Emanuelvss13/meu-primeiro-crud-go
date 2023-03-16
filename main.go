@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/configuration/database/mongodb"
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/configuration/logger"
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/controller"
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/controller/routes"
@@ -13,6 +14,8 @@ import (
 
 func main() {
 	logger.Info("About to start application")
+
+	mongodb.InitConnection()
 
 	err := godotenv.Load()
 
