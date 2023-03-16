@@ -11,6 +11,7 @@ import (
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/model/repository/entity"
 	"github.com/Emanuelvss13/meu-primeiro-crud-go/src/model/repository/entity/converter"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -23,7 +24,9 @@ func (ur *userRepository) FindUserByID(
 
 	collection := ur.db.Collection(collectionName)
 
-	filter := bson.D{{Key: "_id", Value: id}}
+	objectID, _ := primitive.ObjectIDFromHex(id)
+
+	filter := bson.D{{Key: "_id", Value: objectID}}
 
 	userEntity := &entity.UserEntity{}
 
